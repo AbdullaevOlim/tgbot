@@ -2,6 +2,8 @@ from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from models import async_session, Book, Branch
 
+def example_function():
+    return
 
 async def get_book_by_title_and_branch(title: str, branch_name: str):
     async with async_session() as session:
