@@ -15,9 +15,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Убедитесь, что необходимые переменные окружения переданы
 
-ENV TOKEN=7960682573:AAG0RIa7XhWIkooi9TPzrYwAwT-M8WjUVDQ
-ENV SQLALCHEMY_URL=postgresql+asyncpg://postgres:admin@localhost/library
-
 # Команда для запуска приложения
 CMD ["python", "main.py"]
 
