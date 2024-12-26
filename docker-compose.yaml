@@ -28,5 +28,13 @@ services:
     volumes:
       - ./app:/app
 
-volumes:
-  db_data:
+  test:
+  build:
+    context: .
+    dockerfile: Dockerfile
+  environment:
+    - SQLALCHEMY_URL=postgresql+asyncpg://postgres:admin@database:5432/library
+  depends_on:
+    - database
+  command: pytest --cov=app --cov-report=xml
+
