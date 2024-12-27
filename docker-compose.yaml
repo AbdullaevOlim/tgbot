@@ -1,13 +1,14 @@
 version: "3.8"
 
 services:
+  # Уже существующие сервисы: database, telegram_bot
   database:
     image: postgres:latest
     container_name: postgres_db
-    environment: 
-      POSTGRES_USER: postgres  
+    environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: library 
+      POSTGRES_DB: library
     ports:
       - "5433:5432"
     volumes:
@@ -19,14 +20,27 @@ services:
       dockerfile: Dockerfile
     container_name: telegram_bot
     environment:
-      TOKEN: 7960682573:AAG0RIa7XhWIkooi9TPzrYwAwT-M8WjUVDQ
-      SQLALCHEMY_URL: postgresql+asyncpg://postgres:admin@database:5432/library
+      - TOKEN=7960682573:AAG0RIa7XhWIkooi9TPzrYwAwT-M8WjUVDQ
+      - SQLALCHEMY_URL=postgresql+asyncpg://postgres:admin@database:5432/library
     depends_on:
       - database
-    ports:
-      - "8000:8000" # Порт для приложения (если нужно)
     volumes:
       - ./app:/app
 
-  
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: telegram_bot_tests
+    environment:
+      - TOKEN=7960682573:AAG0RIa7XhWIkooi9TPzrYwAwT-M8WjUVDQ
+      - SQLALCHEMY_URL=postgresql+asyncpg://postgres:admin@database:5432/library
+    depends_on:
+      - database
+    volumes:
+      - ./app:/app
+    command: ["pytest", "app/test_handlers.py", "--junitxml=test-results.xml"]
+    # Запуск тестов с выводом результатов в формате JUnit, чтобы можно было обработать в TeamCity
 
+volumes:
+  db_data:
