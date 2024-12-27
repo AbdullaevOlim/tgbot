@@ -1,23 +1,21 @@
 # Используем официальный образ Python
 FROM python:3.9-slim
 
-# Устанавливаем переменные окружения для Python
 ENV PYTHONUNBUFFERED=1
-ENV SQLALCHEMY_URL=postgresql+asyncpg://postgres:admin@database:5432/library
-
-# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем все файлы проекта в контейнер
-COPY . .
-
 # Устанавливаем зависимости
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копируем .env, если используете его
+# Копируем проект в контейнер
+COPY . .
 
-# Запуск тестов с использованием pytest
-RUN pytest --maxfail=1 --disable-warnings -q
+# Добавляем команду для ожидания готовности базы данных
+COPY wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
 
-# Команда для запуска приложения
-CMD ["python", "main.py"]
+# Отдельный этап для запуска тестов
+RUN pytest --disable-warnings --maxfail=1 --cov=app --cov-report=xml || exit 1
+
+CMD ["/wait-for-it.sh", "database:5432", "--", "python", "main.py"]
