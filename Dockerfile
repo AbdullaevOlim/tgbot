@@ -8,7 +8,7 @@ ENV SQLALCHEMY_URL=postgresql+asyncpg://postgres:admin@database:5432/library
 WORKDIR /app
 
 # Копируем все файлы проекта в контейнер
-COPY . .
+COPY . . 
  
 # Устанавливаем зависимости
 RUN pip install --no-cache-dir -r requirements.txt
