@@ -3,3 +3,7 @@ sqlalchemy
 asyncpg
 python-dotenv
 greenlet
+pytest
+pytest-asyncio
+pytest-mock
+pytest-cov
