@@ -7,7 +7,7 @@ ENV SQLALCHEMY_URL=postgresql+asyncpg://postgres:admin@database:5432/library
 # Устанавливаем рабочую директорию 
 WORKDIR /app 
 
-# Копируем все файлы проекта в контейнер
+# Копируем все файлы проекта в контейнер 
 COPY . . 
  
 # Устанавливаем зависимости
