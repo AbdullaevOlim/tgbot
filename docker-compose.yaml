@@ -5,7 +5,7 @@ services:
   database:
     image: postgres:latest
     container_name: postgres_db
-    environment:
+    environment: 
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: library
