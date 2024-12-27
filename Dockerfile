@@ -14,7 +14,7 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Запуск тестов с использованием pytest
-RUN pytest --maxfail=1 --disable-warnings -q
+RUN pytest 
 # Команда для запуска приложения
 CMD ["python", "main.py"]
 
