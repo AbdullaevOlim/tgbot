@@ -13,8 +13,8 @@ COPY . .
 # Устанавливаем зависимости из requirements.txt (убедитесь, что requirements.txt существует)
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Убедитесь, что необходимые переменные окружения переданы
-
+# Запуск тестов с использованием pytest
+RUN pytest --maxfail=1 --disable-warnings -q
 # Команда для запуска приложения
 CMD ["python", "main.py"]
 
