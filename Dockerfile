@@ -9,7 +9,7 @@ WORKDIR /app
 
 # Копируем все файлы проекта в контейнер
 COPY . .
-
+ 
 # Устанавливаем зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
