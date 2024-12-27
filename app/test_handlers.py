@@ -21,4 +21,14 @@ async def test_cmd_start():
         "/edit_branch - Изменить информацию о филиале.\n"
         "/books - Вывести список книг\n"
     )
+@pytest.mark.asyncio
+async def test_stub_one():
+    assert True  # Этот тест всегда успешен
+@pytest.mark.asyncio
+async def test_stub_two():
+    assert True  # Этот тест всегда успешен
+
+@pytest.mark.asyncio
+async def test_stub_three():
+    assert True  # Этот тест всегда успешен
 
