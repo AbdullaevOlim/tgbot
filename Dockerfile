@@ -4,7 +4,7 @@ FROM python:3.9-slim
 ENV PYTHONUNBUFFERED=1
 ENV SQLALCHEMY_URL=postgresql+asyncpg://postgres:admin@database:5432/library
 
-# Устанавливаем рабочую директорию
+# Устанавливаем рабочую директорию 
 WORKDIR /app
 
 # Копируем все файлы проекта в контейнер
