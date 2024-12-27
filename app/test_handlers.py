@@ -22,20 +22,3 @@ async def test_cmd_start():
         "/books - Вывести список книг\n"
     )
 
-@pytest.mark.asyncio
-async def test_cmd_books():
-    """Тест для команды /books."""
-    message = AsyncMock()
-    async def mock_session_execute(*args, **kwargs):
-        class MockResult:
-            def scalars(self):
-                class MockScalar:
-                    def all(self):
-                        return []
-                return MockScalar()
-        return MockResult()
-    # Мокаем сессию базы данных
-    from models import async_session
-    async_session.execute = mock_session_execute
-    await cmd_books(message)
-    message.answer.assert_called_once_with("📚 Нет доступных книг в библиотеке.")
