@@ -1,5 +1,5 @@
 FROM python:3.9-slim
-
+ 
 # Устанавливаем переменные окружения для Python
 ENV PYTHONUNBUFFERED=1
 ENV SQLALCHEMY_URL=postgresql+asyncpg://postgres:admin@database:5432/library
