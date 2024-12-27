@@ -15,7 +15,6 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Копируем .env, если используете его
-COPY .env .env
 
 # Запуск тестов с использованием pytest
 RUN pytest --maxfail=1 --disable-warnings -q
