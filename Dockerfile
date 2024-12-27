@@ -1,20 +1,24 @@
-#Используем официал ьный образ Python  
+# Используем официальный образ Python
 FROM python:3.9-slim
 
-# Устанавливаем переменную окружения для Python
+# Устанавливаем переменные окружения для Python
 ENV PYTHONUNBUFFERED=1
+ENV SQLALCHEMY_URL=postgresql+asyncpg://postgres:admin@database:5432/library
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем файлы проекта в контейнер
+# Копируем все файлы проекта в контейнер
 COPY . .
 
-# Устанавливаем зависимости из requirements.txt (убедитесь, что requirements.txt существует)
+# Устанавливаем зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Копируем .env, если используете его
+COPY .env .env
+
 # Запуск тестов с использованием pytest
-RUN pytest 
+RUN pytest --maxfail=1 --disable-warnings -q
+
 # Команда для запуска приложения
 CMD ["python", "main.py"]
-
